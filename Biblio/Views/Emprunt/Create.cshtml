@@ -1,0 +1,26 @@
+﻿@model Emprunt
+
+@{
+    ViewBag.Title = "Emprunter un Livre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>📖 Emprunter un Livre</h1>
+
+<form method="post" action="~/Emprunt/Create">
+    <div class="form-group">
+        <label for="LivreId">Livre</label>
+        <select name="LivreId" class="form-control">
+            @foreach (var livre in ViewBag.Livres)
+            {
+                <option value="@livre.Id">@livre.Titre (@livre.CopiesDisponibles copies disponibles)</option>
+            }
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <label>Date Retour Prévue</label>
+        <input type="date" name="DateRetourPrevue" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">✅ Emprunter</button>
+    <a href="~/Emprunt/Index" class="btn btn-secondary mt-3">❌ Annuler</a>
+</form>

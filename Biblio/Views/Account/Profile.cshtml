@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Mon Profil</h1>
+<p class="lead">Consultez et mettez à jour vos informations personnelles.</p>
+
+<form method="post" action="~/Account/Profile">
+    <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" class="form-control" id="username" value="@(User.Identity?.Name)" readonly>
+    </div>
+    <div class="form-group mt-3">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" value="@(User.Identity?.Name)" readonly>
+    </div>
+    <div class="form-group mt-3">
+        <label for="telephone">Téléphone</label>
+        <input type="text" class="form-control" id="telephone" placeholder="Votre numéro de téléphone">
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
+</form>

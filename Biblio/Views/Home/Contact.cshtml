@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Contactez-nous</h1>
+<p class="lead">Vous avez une question ? N'hésitez pas à nous contacter.</p>
+
+<form method="post" action="~/Home/Contact">
+    <div class="form-group">
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" id="nom" placeholder="Votre nom">
+    </div>
+    <div class="form-group mt-3">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Votre email">
+    </div>
+    <div class="form-group mt-3">
+        <label for="message">Message</label>
+        <textarea class="form-control" id="message" rows="4"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Envoyer</button>
+</form>

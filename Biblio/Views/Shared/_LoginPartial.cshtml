@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Utilisateur> SignInManager
+@inject UserManager<Utilisateur> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Bonjour, @user?.UserName
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="~/Account/Profile">Profil</a></li>
+                <li>
+                    <form method="post" asp-action="Logout" asp-controller="Account">
+                        <button type="submit" class="dropdown-item">Déconnexion</button>
+                    </form>
+                </li>
+            </ul>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="~/Account/Login">Connexion</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="~/Account/Register">Inscription</a>
+        </li>
+    }
+</ul>

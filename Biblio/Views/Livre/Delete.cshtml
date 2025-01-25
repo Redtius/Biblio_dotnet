@@ -1,0 +1,14 @@
+﻿@model Livre
+
+@{
+    ViewBag.Title = "Modifier le Livre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>✏️ Modifier le Livre</h1>
+
+<form method="post" action="~/Livre/Edit/@Model.Id">
+    @Html.EditorForModel()
+    <button type="submit" class="btn btn-warning mt-3">💾 Enregistrer</button>
+    <a href="~/Livre/Index" class="btn btn-secondary mt-3">❌ Annuler</a>
+</form>

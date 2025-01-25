@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Biblio.Models.Emprunt>
+
+@{
+    ViewBag.Title = "📊 Suivi des Emprunts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>📊 Suivi des Emprunts</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Livre</th>
+            <th>Utilisateur</th>
+            <th>Date d'Emprunt</th>
+            <th>Date Retour Prévue</th>
+            <th>Date Retour Effective</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emprunt in Model)
+        {
+            <tr>
+                <td>@emprunt.Livre.Titre</td>
+                <td>@emprunt.Utilisateur.UserName</td>
+                <td>@emprunt.DateEmprunt.ToShortDateString()</td>
+                <td>@emprunt.DateRetourPrevue.ToShortDateString()</td>
+                <td>@(emprunt.DateRetourEffective.HasValue ? emprunt.DateRetourEffective.Value.ToShortDateString() : "Non retourné")</td>
+                <td>
+                    @if (emprunt.EnAttenteDeConfirmation)
+                    {
+                        <form asp-action="ConfirmerRetour" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@emprunt.Id" />
+                            <button type="submit" class="btn btn-sm btn-success">✅ Confirmer</button>
+                        </form>
+                        <form asp-action="AnnulerRetour" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@emprunt.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">❌ Annuler</button>
+                        </form>
+                    }
+                    else if (emprunt.EstRetourne)
+                    {
+                        <span class="badge bg-success">✅ Retourné</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

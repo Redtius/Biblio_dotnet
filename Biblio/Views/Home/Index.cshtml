@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Accueil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- 🌟 HERO SECTION -->
+<section class="hero bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1 class="display-3 fw-bold">Bienvenue à la Bibliothèque Virtuelle 📚</h1>
+        <p class="lead">Découvrez, empruntez et explorez une collection infinie de livres.</p>
+        <a href="~/Livre/Index" class="btn btn-light btn-lg mt-3">🔍 Parcourir les Livres</a>
+    </div>
+</section>
+
+<!-- 🌟 CARDS SECTION (FEATURES) -->
+<section class="features py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">✨ Fonctionnalités Principales</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold">🔍 Recherche Avancée</h5>
+                        <p>Filtrez par titre, auteur, genre ou disponibilité.</p>
+                        <a href="~/Recherche/Index" class="btn btn-outline-primary btn-sm">Rechercher</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold">📖 Empruntez Facilement</h5>
+                        <p>Réservez vos livres préférés en quelques clics.</p>
+                        <a href="~/Emprunt/Create" class="btn btn-outline-primary btn-sm">Emprunter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded mb-4">
+                    <div class="card-body">
+                        <h5 class="fw-bold">👤 Gestion du Compte</h5>
+                        <p>Connectez-vous pour accéder à vos préférences.</p>
+                        <a href="~/Account/Login" class="btn btn-outline-primary btn-sm">Se Connecter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 🌟 STATISTIQUES -->
+<section class="stats text-white py-5" style="background: #343a40;">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">📊 Statistiques de la Bibliothèque</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h3 class="display-5 fw-bold">📚 1200+</h3>
+                <p>Livres Disponibles</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="display-5 fw-bold">👤 500+</h3>
+                <p>Utilisateurs Inscrits</p>
+            </div>
+            <div class="col-md-4">
+                <h3 class="display-5 fw-bold">🔄 300+</h3>
+                <p>Emprunts Actifs</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 🌟 TÉMOIGNAGES -->
+<section class="testimonials py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">💬 Témoignages</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <blockquote class="blockquote p-3 bg-white shadow-sm rounded">
+                    <p>"Une expérience incroyable ! La recherche est rapide et intuitive."</p>
+                    <footer class="blockquote-footer">Alice Dupont</footer>
+                </blockquote>
+            </div>
+            <div class="col-md-6">
+                <blockquote class="blockquote p-3 bg-white shadow-sm rounded">
+                    <p>"Des livres fantastiques et une interface facile à utiliser."</p>
+                    <footer class="blockquote-footer">Jean Martin</footer>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 🌟 CALL TO ACTION -->
+<section class="cta bg-success text-white text-center py-5">
+    <div class="container">
+        <h2 class="fw-bold">Prêt à rejoindre notre communauté ?</h2>
+        <a href="~/Account/Register" class="btn btn-light btn-lg mt-3">🚀 Créez votre Compte</a>
+    </div>
+</section>

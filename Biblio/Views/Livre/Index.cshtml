@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Livre>
+
+@{
+    ViewBag.Title = "Liste des Livres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liste des Livres</h2>
+
+<p>
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="~/Livre/Create" class="btn btn-primary">Ajouter un livre</a>
+    }
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Auteur</th>
+            <th>Genre</th>
+            <th>Année</th>
+            <th>Copies Disponibles</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var livre in Model)
+        {
+            <tr>
+                <td>@livre.Titre</td>
+                <td>@livre.Auteur</td>
+                <td>@livre.Genre</td>
+                <td>@livre.AnneePublication</td>
+                <td>@livre.CopiesDisponibles</td>
+                <td>
+                    <a href="~/Livre/Details/@livre.Id" class="btn btn-info btn-sm">Détails</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a href="~/Livre/Edit/@livre.Id" class="btn btn-warning btn-sm">Modifier</a>
+                        <a href="~/Livre/Delete/@livre.Id" class="btn btn-danger btn-sm">Supprimer</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

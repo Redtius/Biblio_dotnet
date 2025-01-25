@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Gestion de Bibliothèque</title>
+    <link href="~/lib/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="~/Home/Index">📚 Bibliothèque</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item"><a class="nav-link" href="~/Livre/Index">📚 Livres</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Recherche/Index">🔍 Recherche</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item"><a class="nav-link" href="~/Admin/Dashboard">⚙️ Admin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="~/Admin/SuiviEmprunts">📊 Suivi Emprunts</a></li>
+                                <li class="nav-item"><a class="nav-link" href="~/Admin/GererUtilisateurs">👤 Gérer Utilisateurs</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item"><a class="nav-link" href="~/Emprunt/Index">🔄 Emprunts</a></li>
+                            }
+                            <li class="nav-item">
+                                <form method="post" asp-controller="Account" asp-action="Logout" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-outline-light btn-sm ms-2">🚪 Logout</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a class="nav-link" href="~/Account/Login">🔑 Connexion</a></li>
+                            <li class="nav-item"><a class="nav-link" href="~/Account/Register">📝 Inscription</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- ✅ Corps Principal -->
+    <main role="main" class="container mt-4">
+        @RenderBody()
+    </main>
+
+    <!-- ✅ Pied de page avec _Footer -->
+    <footer>
+        @Html.Partial("_Footer")
+    </footer>
+
+    <!-- ✅ Scripts JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    @* Validation Scripts *@
+    @Html.Partial("_ValidationScriptsPartial")
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@model Livre
+
+@{
+    ViewBag.Title = "Détails du Livre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>📖 @Model.Titre</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Titre</h5>
+        <p><strong>Auteur :</strong> @Model.Auteur</p>
+        <p><strong>Genre :</strong> @Model.Genre</p>
+        <p><strong>Éditeur :</strong> @Model.Editeur</p>
+        <p><strong>Année de Publication :</strong> @Model.AnneePublication</p>
+        <p><strong>Copies Disponibles :</strong> @Model.CopiesDisponibles</p>
+    </div>
+</div>
+
+<a href="~/Livre/Index" class="btn btn-secondary mt-3">⬅️ Retour à la liste</a>
+@if (User.IsInRole("Admin"))
+{
+    <a href="~/Livre/Edit/@Model.Id" class="btn btn-warning mt-3">✏️ Modifier</a>
+    <a href="~/Livre/Delete/@Model.Id" class="btn btn-danger mt-3">🗑️ Supprimer</a>
+}

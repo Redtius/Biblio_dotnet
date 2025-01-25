@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Biblio.Models.Emprunt>
+
+@{
+    ViewBag.Title = "📚 Mes Emprunts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>📚 Mes Emprunts</h1>
+
+@if (TempData["FraisRetard"] != null && TempData["EmpruntId"] != null)
+{
+    <div class="alert alert-warning">
+        💰 <strong>Frais de retard :</strong> @TempData["FraisRetard"] € pour l'emprunt ID @TempData["EmpruntId"]
+    </div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Livre</th>
+            <th>Date d'Emprunt</th>
+            <th>Date Retour Prévue</th>
+            <th>Date Retour Effective</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var emprunt in Model)
+        {
+            <tr>
+                <td>@emprunt.Id</td>
+                <td>@emprunt.Livre.Titre</td>
+                <td>@emprunt.DateEmprunt.ToShortDateString()</td>
+                <td>@emprunt.DateRetourPrevue.ToShortDateString()</td>
+                <td>@(emprunt.DateRetourEffective.HasValue ? emprunt.DateRetourEffective.Value.ToShortDateString() : "Non retourné")</td>
+                <td>
+                    @if (!emprunt.EstRetourne && !emprunt.EnAttenteDeConfirmation)
+                    {
+                        <form asp-action="SignalerRetour" method="post" onsubmit="return confirm('Voulez-vous signaler le retour de ce livre ?');">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@emprunt.Id" />
+                            <button type="submit" class="btn btn-sm btn-warning">📤 Signaler Retour</button>
+                        </form>
+                    }
+                    else if (emprunt.EnAttenteDeConfirmation)
+                    {
+                        <span class="badge bg-info">🕒 En attente de validation</span>
+                    }
+                    else if (emprunt.EstRetourne)
+                    {
+                        <span class="badge bg-success">✅ Retourné</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

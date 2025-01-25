@@ -1,0 +1,68 @@
+﻿@model Biblio.Models.RechercheLivre
+
+@{
+    ViewBag.Title = "🔍 Recherche de Livres";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>🔍 Recherche de Livres</h1>
+
+<form asp-action="Resultats" method="post" class="mb-4">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="Titre">Titre</label>
+            <input asp-for="Titre" class="form-control" placeholder="Rechercher par titre" />
+        </div>
+        <div class="col-md-3">
+            <label for="Auteur">Auteur</label>
+            <input asp-for="Auteur" class="form-control" placeholder="Rechercher par auteur" />
+        </div>
+        <div class="col-md-2">
+            <label for="Genre">Genre</label>
+            <input asp-for="Genre" class="form-control" placeholder="Rechercher par genre" />
+        </div>
+        <div class="col-md-2">
+            <label for="AnneePublication">Année</label>
+            <input asp-for="AnneePublication" type="number" class="form-control" placeholder="Année" />
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <div class="form-check">
+                <input asp-for="DisponiblesUniquement" class="form-check-input" />
+                <label asp-for="DisponiblesUniquement" class="form-check-label">Disponibles uniquement</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Rechercher</button>
+</form>
+
+@if (Model?.ResultatsRecherche != null && Model.ResultatsRecherche.Any())
+{
+    <h2>📚 Résultats de la Recherche</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Genre</th>
+                <th>Année</th>
+                <th>Disponibilité</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var livre in Model.ResultatsRecherche)
+            {
+                <tr>
+                    <td>@livre.Titre</td>
+                    <td>@livre.Auteur</td>
+                    <td>@livre.Genre</td>
+                    <td>@livre.AnneePublication</td>
+                    <td>@(livre.CopiesDisponibles > 0 ? "✅ Disponible" : "❌ Indisponible")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model?.ResultatsRecherche != null)
+{
+    <p class="text-muted">Aucun résultat trouvé pour les critères spécifiés.</p>
+}

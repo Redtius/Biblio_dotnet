@@ -1,0 +1,21 @@
+﻿@model Emprunt
+
+@{
+    ViewBag.Title = "Retourner un Livre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>🔄 Retourner un Livre</h1>
+
+<p>Confirmez le retour du livre suivant :</p>
+
+<ul>
+    <li><strong>Livre :</strong> @Model.Livre.Titre</li>
+    <li><strong>Utilisateur :</strong> @Model.Utilisateur.UserName</li>
+    <li><strong>Date Emprunt :</strong> @Model.DateEmprunt.ToShortDateString()</li>
+</ul>
+
+<form method="post" action="~/Emprunt/RetourConfirmed/@Model.Id">
+    <button type="submit" class="btn btn-success">✅ Confirmer Retour</button>
+    <a href="~/Emprunt/Index" class="btn btn-secondary">❌ Annuler</a>
+</form>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Utilisateur>
+
+@{
+    ViewBag.Title = "Gérer Utilisateurs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>👤 Gérer Utilisateurs</h1>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var utilisateur in Model)
+        {
+            <tr>
+                <td>@utilisateur.UserName</td>
+                <td>@utilisateur.Email</td>
+                <td>@utilisateur.Telephone</td>
+                <td>
+                    <a href="~/Admin/EditUser/@utilisateur.Id" class="btn btn-sm btn-primary">🛠️ Modifier</a>
+                    <form asp-action="DeleteUserConfirmed" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@utilisateur.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">🗑️ Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
